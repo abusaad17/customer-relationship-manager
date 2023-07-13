@@ -30,7 +30,7 @@ app.use(
         },
         servers: [
           {
-            url: `${process.env.BASE_URL}`,
+            url: `http://localhost:${process.env.PORT || 8080}`,
             description: "Local Dev Server",
           },
           {
@@ -79,5 +79,5 @@ AccountsRoute(app);
 TransactionRoute(app);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Read the docs - ${process.env.BASE_URL}/api/docs   Server is running 🚗`);
+  console.log(`Read the docs - http://localhost:${process.env.PORT || 8080}/api/docs   Server is running 🚗`);
 });
