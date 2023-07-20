@@ -219,7 +219,13 @@ const TransactionRoutes = (app) => {
       const trans = await Transaction.findById(req.params.id);
       const { amount, id, paymentMethod } = req.body;
       if (amount) {
-        trans.transactionType === "withdraw" ? trans.withdrawAmount = amount : trans.depositAmount = amount;
+        console.log(trans.depositAmount);
+        if (trans.transactionType === "deposit") {
+          trans.depositAmount = amount;
+        } else {
+          trans.withdrawAmount = amount;
+        }
+        console.log(trans.depositAmount);
       }
       if (id) {
         trans.transactionID = id;
@@ -227,7 +233,7 @@ const TransactionRoutes = (app) => {
       if (paymentMethod) {
         trans.paymentMethod = paymentMethod;
       }
-      trans.save();
+      await trans.save();
       res.status(200).send({ message: "transaction edited" });
     } catch (e) {
       console.error(e);
